@@ -1,0 +1,782 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "loadBalancers_vmssSwslb_name": {
+            "defaultValue": "vmssSwslb",
+            "type": "String"
+        },
+        "publicIPAddresses_pub_ip_LB_name": {
+            "defaultValue": "pub_ip_LB",
+            "type": "String"
+        },
+        "virtualNetworks_vmssSwsVnet_name": {
+            "defaultValue": "vmssSwsVnet",
+            "type": "String"
+        },
+        "publicIPAddresses_pub_ip_vmss_name": {
+            "defaultValue": "pub-ip-vmss",
+            "type": "String"
+        },
+        "loadBalancers_LB_Azure_swaroop_name": {
+            "defaultValue": "LB-Azure-swaroop",
+            "type": "String"
+        },
+        "virtualMachineScaleSets_vmssSws_name": {
+            "defaultValue": "vmssSws",
+            "type": "String"
+        },
+        "networkSecurityGroups_vmssSwsnsg_name": {
+            "defaultValue": "vmssSwsnsg",
+            "type": "String"
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa1_name": {
+            "defaultValue": "slstrvmfjvmssswsslsa1",
+            "type": "String"
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa0_name": {
+            "defaultValue": "slstrvmfjvmssswsslsa0",
+            "type": "String"
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa3_name": {
+            "defaultValue": "slstrvmfjvmssswsslsa3",
+            "type": "String"
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa2_name": {
+            "defaultValue": "slstrvmfjvmssswsslsa2",
+            "type": "String"
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa4_name": {
+            "defaultValue": "slstrvmfjvmssswsslsa4",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id_1": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/backendAddressPools/bepool",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id_2": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/probes/tcpProbe",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id_3": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id_4": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        },
+        "loadBalancers_vmssSwslb_id_5": {
+            "defaultValue": "/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Compute/virtualMachineScaleSets/vmssSws'.",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "sku": {
+                "name": "Standard_DS1_v2",
+                "tier": "Standard",
+                "capacity": 2
+            },
+            "name": "[parameters('virtualMachineScaleSets_vmssSws_name')]",
+            "apiVersion": "2017-12-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "singlePlacementGroup": true,
+                "upgradePolicy": {
+                    "mode": "Manual",
+                    "automaticOSUpgrade": false
+                },
+                "virtualMachineProfile": {
+                    "osProfile": {
+                        "computerNamePrefix": "[concat(parameters('virtualMachineScaleSets_vmssSws_name'),'vmssswssl')]",
+                        "adminUsername": "sws-ubuntu1",
+                        "linuxConfiguration": {
+                            "disablePasswordAuthentication": true,
+                            "ssh": {
+                                "publicKeys": [
+                                    {
+                                        "path": "/home/sws-ubuntu1/.ssh/authorized_keys",
+                                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAh09jIwxHOj9pYR2R39qAjgKlYbMA8vYQGyw3R7aY7wNj69q9i7kUlc84ZNgKcD8B8yAyDw3S/kZPESZU00G1PnlywMz/Hphd6mWbpCYmBlwdgej0zg/2ChSIyTo8KVr+Bo4bloxoF6WSbvVj3Bo0Ql52W/bW1E8p0Q2XlzFmHrP98CAaHMpvEDdQPNkDX8yXDW09BS4PU7b7KnheEJN+TaT8o/NeYE7h6rXaJUCWE5A5YbpdpOmd4pTlaXR2f9sGqA9DyDW/U5O2C0JT5jbtp9MsUj08DcEMqDKFhNRy1ObHmROds9brH46W6nZCab8TdPj8OBC4V84Hwhv17Z/kFw== rsa-key-20180803"
+                                    }
+                                ]
+                            }
+                        },
+                        "secrets": []
+                    },
+                    "storageProfile": {
+                        "osDisk": {
+                            "vhdContainers": [
+                                "https://slstrvmfjvmssswsslsa0.blob.core.windows.net/vmssswsslvhd",
+                                "https://slstrvmfjvmssswsslsa1.blob.core.windows.net/vmssswsslvhd",
+                                "https://slstrvmfjvmssswsslsa2.blob.core.windows.net/vmssswsslvhd",
+                                "https://slstrvmfjvmssswsslsa3.blob.core.windows.net/vmssswsslvhd",
+                                "https://slstrvmfjvmssswsslsa4.blob.core.windows.net/vmssswsslvhd"
+                            ],
+                            "name": "[concat(parameters('virtualMachineScaleSets_vmssSws_name'),'vmssswsslosdisk')]",
+                            "createOption": "FromImage",
+                            "caching": "ReadWrite"
+                        },
+                        "imageReference": {
+                            "publisher": "Canonical",
+                            "offer": "UbuntuServer",
+                            "sku": "16.04-LTS",
+                            "version": "latest"
+                        }
+                    },
+                    "networkProfile": {
+                        "networkInterfaceConfigurations": [
+                            {
+                                "name": "[concat(parameters('virtualMachineScaleSets_vmssSws_name'),'Nic')]",
+                                "properties": {
+                                    "primary": true,
+                                    "enableAcceleratedNetworking": false,
+                                    "dnsSettings": {
+                                        "dnsServers": []
+                                    },
+                                    "enableIPForwarding": false,
+                                    "ipConfigurations": [
+                                        {
+                                            "name": "[concat(parameters('virtualMachineScaleSets_vmssSws_name'),'IpConfig')]",
+                                            "properties": {
+                                                "subnet": {
+                                                    "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_vmssSwsVnet_name')), '/subnets/default')]"
+                                                },
+                                                "privateIPAddressVersion": "IPv4",
+                                                "loadBalancerBackendAddressPools": [
+                                                    {
+                                                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_vmssSwslb_name')), '/backendAddressPools/bepool')]"
+                                                    }
+                                                ],
+                                                "loadBalancerInboundNatPools": [
+                                                    {
+                                                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_vmssSwslb_name')), '/inboundNatPools/natpool')]"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "priority": "Regular"
+                },
+                "overprovision": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_vmssSwsVnet_name'))]",
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_vmssSwslb_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/LB-Azure-swaroop'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "name": "[parameters('loadBalancers_LB_Azure_swaroop_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "7e3cbf6a-76d9-41e1-a2da-db46cbf32a8d",
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "etag": "W/\"75c95cd7-4fda-4fd1-af1c-a993e6c5252d\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_pub_ip_LB_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [],
+                "loadBalancingRules": [],
+                "probes": [],
+                "inboundNatRules": [],
+                "inboundNatPools": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_pub_ip_LB_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/loadBalancers/vmssSwslb'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "name": "[parameters('loadBalancers_vmssSwslb_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "861a35ef-14fe-44ed-8c0b-b5103cc476c3",
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_pub_ip_vmss_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "bepool",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded"
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "LBRule",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id')]"
+                            },
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "protocol": "Tcp",
+                            "loadDistribution": "Default",
+                            "disableOutboundSnat": false,
+                            "backendAddressPool": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id_1')]"
+                            },
+                            "probe": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id_2')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "tcpProbe",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "Tcp",
+                            "port": 80,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "inboundNatRules": [
+                    {
+                        "name": "natpool.0",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id_3')]"
+                            },
+                            "frontendPort": 50000,
+                            "backendPort": 22,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp"
+                        }
+                    },
+                    {
+                        "name": "natpool.1",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id_4')]"
+                            },
+                            "frontendPort": 50001,
+                            "backendPort": 22,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 4,
+                            "protocol": "Tcp"
+                        }
+                    }
+                ],
+                "inboundNatPools": [
+                    {
+                        "name": "natpool",
+                        "etag": "W/\"2a6b3a5d-f751-453b-a43a-6fd2db02ff51\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendPortRangeStart": 50000,
+                            "frontendPortRangeEnd": 50119,
+                            "backendPort": 22,
+                            "protocol": "Tcp",
+                            "idleTimeoutInMinutes": 4,
+                            "enableFloatingIP": false,
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_vmssSwslb_id_5')]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_pub_ip_vmss_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/networkSecurityGroups/vmssSwsnsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_vmssSwsnsg_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "d7e606fe-adac-4263-88dd-a84ff32920a9",
+                "securityRules": [
+                    {
+                        "name": "allowSSH",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow SSH traffic",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allowHTTP",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow web traffic",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1001,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ],
+                "defaultSecurityRules": [
+                    {
+                        "name": "AllowVnetInBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowAzureLoadBalancerInBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from azure load balancer",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "AzureLoadBalancer",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllInBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all inbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowVnetOutBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowInternetOutBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to Internet",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "Internet",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllOutBound",
+                        "etag": "W/\"4257eb43-de40-4cd4-98d3-e00d76edd921\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all outbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/publicIPAddresses/pub-ip-vmss'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "name": "[parameters('publicIPAddresses_pub_ip_vmss_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "2dad0ac6-de75-4413-a8a5-d258ad00f844",
+                "ipAddress": "40.90.186.247",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "swaroop-devops",
+                    "fqdn": "swaroop-devops.southeastasia.cloudapp.azure.com"
+                },
+                "ipTags": []
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/publicIPAddresses/pub_ip_LB'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "name": "[parameters('publicIPAddresses_pub_ip_LB_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "dc53e532-7fa1-4298-9048-947a54f774f9",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Network/virtualNetworks/vmssSwsVnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_vmssSwsVnet_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "southeastasia",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "d52d2df6-10d5-4521-80a4-b5e3493340c7",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "etag": "W/\"71042dcc-9195-4042-b29b-8f23163216bb\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.0.0.0/21",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_vmssSwsnsg_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_vmssSwsnsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Storage/storageAccounts/slstrvmfjvmssswsslsa1'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_slstrvmfjvmssswsslsa1_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Storage/storageAccounts/slstrvmfjvmssswsslsa0'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_slstrvmfjvmssswsslsa0_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Storage/storageAccounts/slstrvmfjvmssswsslsa3'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_slstrvmfjvmssswsslsa3_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Storage/storageAccounts/slstrvmfjvmssswsslsa2'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_slstrvmfjvmssswsslsa2_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/4955f997-43b3-4145-8527-817c15c5c8af/resourceGroups/swaroop/providers/Microsoft.Storage/storageAccounts/slstrvmfjvmssswsslsa4'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_slstrvmfjvmssswsslsa4_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

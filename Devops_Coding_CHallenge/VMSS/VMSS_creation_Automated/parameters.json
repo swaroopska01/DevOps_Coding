@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "loadBalancers_vmssSwslb_name": {
+            "value": null
+        },
+        "publicIPAddresses_pub_ip_LB_name": {
+            "value": null
+        },
+        "virtualNetworks_vmssSwsVnet_name": {
+            "value": null
+        },
+        "publicIPAddresses_pub_ip_vmss_name": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_name": {
+            "value": null
+        },
+        "virtualMachineScaleSets_vmssSws_name": {
+            "value": null
+        },
+        "networkSecurityGroups_vmssSwsnsg_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa1_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa0_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa3_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa2_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa4_name": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_1": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_2": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_3": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_4": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_5": {
+            "value": null
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_mp_api_bluesea_name": {
+            "value": null
+        },
+        "serverfarms_storageapi_ci_hp_name": {
+            "value": null
+        },
+        "components_storageapi_ai_name": {
+            "value": null
+        },
+        "storageAccounts_mpapisabluesea_name": {
+            "value": null
+        },
+        "alertrules_Failure_Anomalies___storageapi_ai_name": {
+            "value": null
+        },
+        "hostNameBindings_mp_api_bluesea.azurewebsites.net_name": {
+            "value": null
+        },
+        "hostNameBindings_marketplace_api.cloud.sitecore.net_name": {
+            "value": null
+        },
+        "hostNameBindings_prodmarketplace_api.trafficmanager.net_name": {
+            "value": null
+        },
+        "certificates_7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E#mp_api_rg_bluesea_SoutheastAsiawebspace_name": {
+            "value": null
+        }
+    }
+}

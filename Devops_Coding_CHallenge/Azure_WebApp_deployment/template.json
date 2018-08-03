@@ -1,0 +1,290 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_mp_api_bluesea_name": {
+            "defaultValue": "mp-api-bluesea",
+            "type": "String"
+        },
+        "serverfarms_storageapi_ci_hp_name": {
+            "defaultValue": "storageapi-ci-hp",
+            "type": "String"
+        },
+        "components_storageapi_ai_name": {
+            "defaultValue": "storageapi-ai",
+            "type": "String"
+        },
+        "storageAccounts_mpapisabluesea_name": {
+            "defaultValue": "mpapisabluesea",
+            "type": "String"
+        },
+        "alertrules_Failure_Anomalies___storageapi_ai_name": {
+            "defaultValue": "Failure Anomalies - storageapi-ai",
+            "type": "String"
+        },
+        "hostNameBindings_mp_api_bluesea.azurewebsites.net_name": {
+            "defaultValue": "mp-api-bluesea.azurewebsites.net",
+            "type": "String"
+        },
+        "hostNameBindings_marketplace_api.cloud.sitecore.net_name": {
+            "defaultValue": "marketplace-api.cloud.sitecore.net",
+            "type": "String"
+        },
+        "hostNameBindings_prodmarketplace_api.trafficmanager.net_name": {
+            "defaultValue": "prodmarketplace-api.trafficmanager.net",
+            "type": "String"
+        },
+        "certificates_7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E#mp_api_rg_bluesea_SoutheastAsiawebspace_name": {
+            "defaultValue": "7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E#mp-api-rg-bluesea-SoutheastAsiawebspace",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/microsoft.insights/alertrules/Failure Anomalies - storageapi-ai'.",
+            "type": "microsoft.insights/alertrules",
+            "name": "[parameters('alertrules_Failure_Anomalies___storageapi_ai_name')]",
+            "apiVersion": "2014-04-01",
+            "location": "East US",
+            "tags": {
+                "hidden-link:/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourcegroups/mp-api-rg-bluesea/providers/microsoft.insights/components/storageapi-ai": "Resource"
+            },
+            "scale": null,
+            "properties": {
+                "name": "[parameters('alertrules_Failure_Anomalies___storageapi_ai_name')]",
+                "description": "",
+                "isEnabled": true,
+                "condition": {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                    "dataSource": {
+                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                        "resourceUri": "[resourceId('microsoft.insights/components', parameters('components_storageapi_ai_name'))]",
+                        "metricNamespace": null,
+                        "metricName": "advanced::A3108E3D-5E26-44CF-B232-783F5E20EF10::ewAiAEgAeQBwAGUAcgBpAG8AbgBBAHAAcABsAGkAYwBhAHQAaQBvAG4AUwBpAGQAIgA6AG4AdQBsAGwALAAiAEgAeQBwAGUAcgBpAG8AbgBTAHUAYgBqAGUAYwB0AFMAaQBkACIAOgBuAHUAbABsACwAIgBIAHkAcABlAHIAaQBvAG4ATwBiAHMAZQByAHYAZQByAFMAaQBkACIAOgBuAHUAbABsACwAIgBDAHUAcwB0AG8AbQBlAHIAQQBjAGMAbwB1AG4AdABJAGQAIgA6ACIAMAAwADAAMAAwADAAMAAwAC0AMAAwADAAMAAtADAAMAAwADAALQAwADAAMAAwAC0AMAAwADAAMAAwADAAMAAwADAAMAAwADAAIgAsACIAQQBwAHAAbABpAGMAYQB0AGkAbwBuAE4AYQBtAGUAIgA6AG4AdQBsAGwALAAiAEEAcABwAGwAaQBjAGEAdABpAG8AbgBJAGQAIgA6AG4AdQBsAGwALAAiAFAAcgBvAGYAaQBsAGUASQBkACIAOgAwACwAIgBXAGkAbgBkAG8AdwBTAGkAegBlAEkAbgBNAGkAbgB1AHQAZQBzACIAOgA2ADAALAAiAE0AZQB0AHIAaQBjAE4AYQBtAGUAIgA6ACIAIgAsACIAVABoAHIAZQBzAGgAbwBsAGQAIgA6ADIALgAwACwAIgBBAGwAZQByAHQAVABlAG0AcABsAGEAdABlAEkAZAAiADoAIgAiACwAIgBSAHUAbABlAEkAZAAiADoAIgAiACwAIgBSAHUAbABlAE4AYQBtAGUAIgA6ACIAIgAsACIAUgB1AGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AIgA6ACIAIgAsACIAUgBlAHMAbwB1AHIAYwBlAEkAZAAiADoAbgB1AGwAbAAsACIAUwB1AGIAcwBjAHIAaQBwAHQAaQBvAG4ASQBkACIAOgBuAHUAbABsACwAIgBBAGcAZwByAGUAZwBhAHQAZQBGAHUAbgBjAHQAaQBvAG4AIgA6ACIAIgAsACIAQwBvAG0AcABhAHIAaQBzAG8AbgBPAHAAZQByAGEAdABvAHIAIgA6ACIAewBcACIAQgBhAHMAZQBsAGkAbgBlAFQAaQBtAGUAcwBwAGEAbgBcACIAOgBcACIAMAAwADoANAAwADoAMAAwAFwAIgAsAFwAIgBJAG4AcwBpAGcAaAB0AHMAUwBlAHIAdgBpAGMAZQBMAGEAZwBcACIAOgBcACIAMAAwADoAMAAwADoAMAAwAFwAIgAsAFwAIgBCAHUAZgBmAGUAcgBUAGkAbQBlAFwAIgA6AFwAIgAwADAAOgAwADEAOgAwADAAXAAiACwAXAAiAEIAbABvAGIAUwB0AG8AcgBhAGcAZQBMAG8AZwBnAGkAbgBnAEUAbgBhAGIAbABlAGQAXAAiADoAZgBhAGwAcwBlACwAXAAiAFUAcwBlAHIAUwB1AHAAcAByAGUAcwBzAGkAbwBuAHMAXAAiADoAbgB1AGwAbAAsAFwAIgBQAHIAbwBmAGkAbABlAEkAZABcACIAOgAwACwAXAAiAEUAbQBhAGkAbABUAHkAcABlAFwAIgA6ADAALABcACIAUgBkAGQARgBhAGkAbAB1AHIAZQBzAFMAcABpAGsAZQBUAGgAcgBlAHMAaABvAGwAZABcACIAOgAzAC4AMAAsAFwAIgBSAGEAdwBQAHIAbwBhAGMAdABpAHYAZQBSAHUAbABlAEMAbwBuAGYAaQBnAFwAIgA6AG4AdQBsAGwAfQAiACwAIgBFAG4AYQBiAGwAZQBTAGUAbgBkAEUAbQBhAGkAbABUAG8AQwB1AHMAdABvAG0AIgA6AGYAYQBsAHMAZQAsACIAQwB1AHMAdABvAG0ARQBtAGEAaQBsAHMARQBuAGMAbwBkAGUAZAAiADoAIgAiACwAIgBFAG4AYQBiAGwAZQBTAGUAbgBkAEUAbQBhAGkAbABUAG8ATwB3AG4AZQByAHMAIgA6AGYAYQBsAHMAZQB9AA=="
+                    },
+                    "operator": "GreaterThan",
+                    "threshold": 2,
+                    "windowSize": "PT1H"
+                },
+                "action": {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                    "sendToServiceOwners": true,
+                    "customEmails": []
+                }
+            },
+            "dependsOn": [
+                "[resourceId('microsoft.insights/components', parameters('components_storageapi_ai_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/microsoft.insights/components/storageapi-ai'.",
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[parameters('components_storageapi_ai_name')]",
+            "apiVersion": "2015-05-01",
+            "location": "eastus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "Application_Type": "web",
+                "Flow_Type": null,
+                "Request_Source": null,
+                "HockeyAppId": null,
+                "SamplingPercentage": null
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Storage/storageAccounts/mpapisabluesea'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_GRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_mpapisabluesea_name')]",
+            "apiVersion": "2018-03-01-preview",
+            "location": "southeastasia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/certificates/7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E#mp-api-rg-bluesea-SoutheastAsiawebspace'.",
+            "type": "Microsoft.Web/certificates",
+            "name": "[parameters('certificates_7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E#mp_api_rg_bluesea_SoutheastAsiawebspace_name')]",
+            "apiVersion": "2016-03-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "hostNames": [
+                    "*.cloud.sitecore.net",
+                    "cloud.sitecore.net"
+                ],
+                "pfxBlob": null,
+                "password": null,
+                "cerBlob": null,
+                "serverFarmId": null
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/serverfarms/storageapi-ci-hp'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "size": "S1",
+                "family": "S",
+                "capacity": 1
+            },
+            "kind": "app",
+            "name": "[parameters('serverfarms_storageapi_ci_hp_name')]",
+            "apiVersion": "2016-09-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "name": "[parameters('serverfarms_storageapi_ci_hp_name')]",
+                "workerTierName": null,
+                "adminSiteName": null,
+                "hostingEnvironmentProfile": null,
+                "perSiteScaling": false,
+                "reserved": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/sites/mp-api-bluesea'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('sites_mp_api_bluesea_name')]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "marketplace-api.cloud.sitecore.net",
+                        "sslState": "SniEnabled",
+                        "virtualIP": null,
+                        "thumbprint": "7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E",
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_mp_api_bluesea_name'),'.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_mp_api_bluesea_name'),'.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    },
+                    {
+                        "name": "prodmarketplace-api.trafficmanager.net",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_storageapi_ci_hp_name'))]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_storageapi_ci_hp_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/sites/mp-api-bluesea/hostNameBindings/mp-api-bluesea.azurewebsites.net'.",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_mp_api_bluesea_name'), '/', parameters('hostNameBindings_mp_api_bluesea.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "siteName": "mp-api-bluesea",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_mp_api_bluesea_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/sites/mp-api-bluesea/hostNameBindings/marketplace-api.cloud.sitecore.net'.",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_mp_api_bluesea_name'), '/', parameters('hostNameBindings_marketplace_api.cloud.sitecore.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "siteName": "mp-api-bluesea",
+                "domainId": null,
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "7899D9F60C0D90D4477FB2C20C7BEDF9FEDBE48E"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_mp_api_bluesea_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/23a4d720-19ed-4e65-b09a-49561758a394/resourceGroups/mp-api-rg-bluesea/providers/Microsoft.Web/sites/mp-api-bluesea/hostNameBindings/prodmarketplace-api.trafficmanager.net'.",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_mp_api_bluesea_name'), '/', parameters('hostNameBindings_prodmarketplace_api.trafficmanager.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "siteName": "mp-api-bluesea",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_mp_api_bluesea_name'))]"
+            ]
+        }
+    ]
+}

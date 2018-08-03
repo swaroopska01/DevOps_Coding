@@ -1,0 +1,3 @@
+Test The Web Page
+
+Open "http://localhost:8080/helloworld/hi.jsp" to see the web application running.

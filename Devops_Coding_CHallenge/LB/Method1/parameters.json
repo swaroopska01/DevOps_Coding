@@ -1,0 +1,165 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "extensions_newuserscript_storageAccountName": {
+            "value": null
+        },
+        "extensions_newuserscript_storageAccountKey": {
+            "value": null
+        },
+        "extensions_newuserscript_commandToExecute": {
+            "value": null
+        },
+        "extensions_enablevmaccess_username": {
+            "value": null
+        },
+        "extensions_enablevmaccess_password": {
+            "value": null
+        },
+        "extensions_enablevmaccess_ssh_key": {
+            "value": null
+        },
+        "extensions_enablevmaccess_reset_ssh": {
+            "value": null
+        },
+        "extensions_enablevmaccess_remove_user": {
+            "value": null
+        },
+        "extensions_enablevmaccess_expiration": {
+            "value": null
+        },
+        "storageAccounts_lastr_name": {
+            "value": null
+        },
+        "virtualNetworks_MyVNET_name": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_name": {
+            "value": null
+        },
+        "storageAccounts_strhttpd_name": {
+            "value": null
+        },
+        "networkInterfaces_myVMNic_name": {
+            "value": null
+        },
+        "virtualMachines_MyUbuntuVM_name": {
+            "value": null
+        },
+        "publicIPAddresses_pub_ip_LB_name": {
+            "value": null
+        },
+        "virtualNetworks_vmssSwsVnet_name": {
+            "value": null
+        },
+        "virtualMachines_ubuntulinvm1_name": {
+            "value": null
+        },
+        "publicIPAddresses_myPublicIP_name": {
+            "value": null
+        },
+        "availabilitySets_avail_devops_name": {
+            "value": null
+        },
+        "publicIPAddresses_pub_ip_vmss_name": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_name": {
+            "value": null
+        },
+        "storageAccounts_swaroopdiag792_name": {
+            "value": null
+        },
+        "virtualMachineScaleSets_vmssSws_name": {
+            "value": null
+        },
+        "storageAccounts_swaroopdisks674_name": {
+            "value": null
+        },
+        "networkSecurityGroups_vmssSwsnsg_name": {
+            "value": null
+        },
+        "networkInterfaces_ubuntulinvm1313_name": {
+            "value": null
+        },
+        "networkInterfaces_ubuntulinvm1794_name": {
+            "value": null
+        },
+        "publicIPAddresses_ubuntulinvm1_ip_name": {
+            "value": null
+        },
+        "publicIPAddresses_ubuntulinvm1ip433_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa1_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa0_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa3_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa2_name": {
+            "value": null
+        },
+        "storageAccounts_slstrvmfjvmssswsslsa4_name": {
+            "value": null
+        },
+        "networkSecurityGroups_ubuntulinvm1_nsg_name": {
+            "value": null
+        },
+        "schedules_shutdown_computevm_ubuntulinvm1_name": {
+            "value": null
+        },
+        "extensions_newuserscript_name": {
+            "value": null
+        },
+        "extensions_enablevmaccess_name": {
+            "value": null
+        },
+        "extensions_AzureNetworkWatcherExtension_name": {
+            "value": null
+        },
+        "virtualMachines_MyUbuntuVM_id": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id_1": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id_2": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id_3": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id_4": {
+            "value": null
+        },
+        "loadBalancers_LB_Azure_swaroop_id_5": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_1": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_2": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_3": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_4": {
+            "value": null
+        },
+        "loadBalancers_vmssSwslb_id_5": {
+            "value": null
+        }
+    }
+}
