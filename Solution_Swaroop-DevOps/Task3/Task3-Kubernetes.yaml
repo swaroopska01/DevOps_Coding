@@ -1,0 +1,168 @@
+
+#################### Set up (in kubernetes/minicube) 2 pods with a java example app #################### 
+
+$ git clone git@github.com:stantonk/java-docker-example.git
+$ cd java-docker-example
+$ $ mvn clean install
+…
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 17.210 s
+[INFO] Finished at: 2017-09-30T11:28:37+01:00
+[INFO] Final Memory: 41M/328M
+[INFO] ------------------------------------------------------------------------
+
+$ docker build -t java-docker-example
+$ docker build --tag app .
+$ docker image ls
+$ docker run -it --rm -p 8080:8080 java-docker-example
+$ docker-compose up
+
+cd $ROOT_JAVA
+
+#Maven build
+mvn clean install
+rm -f $ROOT_DOCKER/install/*
+#Copy artifacts for Docker
+find . -regex '.*target/[^\/]*\.jar' -exec cp {} $ROOT_DOCKER/install \;
+ls $ROOT_DOCKER/install
+
+#Docker build and publish
+DOCKER_IMAGE="some-repository/rhesb:$BUILD_NUMBER"
+cd $ROOT_DOCKER
+docker build -t rhesb .
+docker tag rhesb $DOCKER_IMAGE
+docker push $DOCKER_IMAGE
+
+#Kubernetes redeploy
+kubectl set image statefulset/rhesb rhesb=$DOCKER_IMAGE
+kubectl get pod | grep 'rhesb' | cut -d " " -f1 - | awk '{ print $1; system("sleep 60") }' |  xargs -n1 kubectl delete pod --v=3
+
+#################### Set up (in kubernetes/minicube) 2 pods with a java example app #################### 
+
+########################   Kubernetes Deployments ########################
+
+#Deploying an application in Kubernetes requires to create multiple resources such as Pods, Services,
+#Replication Controllers, and others. Typically each resource is define in a configuration file and created using kubectl script.
+
+kubectl.sh create -f ~/workspaces/kubernetes-java-sample/app-mysql-pod.yaml
+kubectl.sh create -f ~/workspaces/kubernetes-java-sample/app-mysql-service.yaml
+
+kubectl.sh create -f ~/workspaces/kubernetes-java-sample/app.yaml
+pods/mysql-pod
+services/mysql-service
+
+########################   Kubernetes Deployments ########################
+
+#######   Creating Kubernetes Pod resources  ####### 
+
+Create pod: kubectl create -f app-mysql-pod.yaml
+
+Get pods: kubectl get pods
+
+Wide: kubectl get pods -o wide
+
+YAML: kubectl get pods -o yaml
+
+JSON: kubectl get pods -o json
+
+Describe pod: kubectl describe pod/app-mysql-pod
+
+Delete pod: kubectl delete pod/app-mysql-pod
+
+Get pods: kubectl get pods
+
+$ kubectl get pods --show-all
+$ kubectl logs -f <pod-name>
+
+
+#######   Load Balancing  ####### 
+
+ClusterIP: This is default, exposes service on cluster-internal IP.
+
+Create: kubectl create -f lb-clusterip.yaml
+
+Describe: kubectl get svc
+
+NAME              CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+kubernetes        100.64.0.1    <none>        443/TCP    48m
+wildfly-service   100.71.85.1   <none>        8080/TCP   13m
+Details: kubectl describe svc wildfly-service
+
+kubectl describe svc wildfly-service
+Name:			wildfly-service
+Namespace:		default
+Labels:			<none>
+Annotations:		<none>
+Selector:		app=wildfly-rc-pod
+Type:			ClusterIP
+IP:			100.71.85.1
+Port:			web	8080/TCP
+Endpoints:		100.96.1.4:8080,100.96.2.3:8080
+Session Affinity:	None
+Events:			<none>
+Access: Service is accessible only inside the cluster.
+
+Expose the service: kubectl expose service wildfly-service --port=8080 --target-port=8080 --name=web
+
+Start Kubernetes proxy: kubectl proxy
+
+Access the service: curl http://localhost:8001/api/v1/proxy/namespaces/default/services/web/index.html
+
+Delete:
+
+kubectl delete -f lb-clusterip.yaml
+kubectl delete svc/web
+
+#######   Load Balancing  ####### 
+
+############  Autoscaling based on CPU/Memory in Kubernetes  ############ 
+
+Syntax : kubectl autoscale deployment <deployment-name> --min=2 --max=5 --cpu-percent=80
+
+$ kubectl get deployment
+$ kubectl autoscale deployment tomcat02 --min=2 --max=5 --cpu-percent=80
+deployment "tomcat02" autoscaled
+$ kubectl scale deployment tomcat02 --replicas=3
+$ kubectl get deployment tomcat02
+$ kubectl get hpa  ( “kubectl get hpa” to get the available hpa in the cluster)
+$ kubectl get hpa/tomcat02 -o yaml > tomcat-hpa.yaml
+$ kubectl apply -f tomcat-hpa.yaml
+
+
+
+####################  using minikube #################### 
+
+$ minikube start
+$ kubectl cluster-info
+$ kubectl get nodes
+$ kubectl get pods --all-namespaces
+
+
+###############  Monitoring Application Performance in Kubernetes  ############### 
+
+Kubernetes is helping a wide variety of businesses automate the deployment, scaling, and management of their applications.
+
+
+####### Configuring auto-heal in Kubernetes  #######
+
+One of the main advantages of using Kubernetes is its ability to maintain containers running in a cluster: Simply create a pod resource, let Kubernetes choose a worker node for it, and it will run the pod’s containers on that node.
+
+$ kubectl create -f https://k8s.io/examples/pods/probe/Kubernetes-Auto-heal.yaml
+$ kubectl describe pod liveness-exec
+
+FirstSeen    LastSeen    Count   From            SubobjectPath           Type        Reason      Message
+--------- --------    -----   ----            -------------           --------    ------      -------
+24s       24s     1   {default-scheduler }                    Normal      Scheduled   Successfully assigned liveness-exec to worker0
+23s       23s     1   {kubelet worker0}   spec.containers{liveness}   Normal      Pulling     pulling image "k8s.gcr.io/busybox"
+23s       23s     1   {kubelet worker0}   spec.containers{liveness}   Normal      Pulled      Successfully pulled image "k8s.gcr.io/busybox"
+23s       23s     1   {kubelet worker0}   spec.containers{liveness}   Normal      Created     Created container with docker id 86849c15382e; Security:[seccomp=unconfined]
+23s       23s     1   {kubelet worker0}   spec.containers{liveness}   Normal      Started     Started container with docker id 86849c15382e
+
+$ kubectl get pod liveness-exec
+
+NAME            READY     STATUS    RESTARTS   AGE
+liveness-exec   1/1       Running   1          1m
+
+####### Configuring auto-heal in Kubernetes  #######
